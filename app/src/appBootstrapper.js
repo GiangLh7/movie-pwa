@@ -1,0 +1,1 @@
+import MovieService from './services/movie.service';
