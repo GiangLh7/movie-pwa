@@ -22,3 +22,4 @@ server/public/notification\.js
 server/public/index\.html
 
 server/public/notification\.html
+/app/node_modules/
