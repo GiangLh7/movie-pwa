@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 class Movie extends Component {
   constructor(props) {
@@ -23,12 +24,26 @@ class Movie extends Component {
             <h2>
               {movie.title}
               <small className="label label-warning">
-                {movie.}
+                {movie.vote_average}
+                <i className="glyphicon glyphicon-star"></i>
               </small>
             </h2>
+            <p>{movie.tagline}</p>
+            <p>
+              {
+                movie.genre.map((item) => <Link to={`/genres/${item.id}/${item.name}`}>{item.name}</Link>)
+              }
+            </p>
+            <h3>Overview</h3>
+            <p>{movie.overview}</p>
+            
+            {/*<Casts>*/}
+            
           </div>
         </div>
       </div>
     );
   }
 }
+
+export default Movie;

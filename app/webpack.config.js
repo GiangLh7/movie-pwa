@@ -3,6 +3,28 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = function () {
+  const styleLoaderConfig = {
+    test: /\.(css|scss)$/,
+    use: [
+      {
+        loader: 'style-loader'
+      },
+      {
+        loader: 'css-loader'
+      },
+      {
+        loader: 'sass-loader',
+        options: {
+          includePaths: ['./src/**/*.scss']
+        }
+      }
+    ]
+  };
+  
+  function getStyleLoader() {
+    return Object.assign({}, styleLoaderConfig);
+  }
+  
   const webpackConfig = {
     name: 'movie-pwa',
     entry: {
@@ -32,6 +54,7 @@ module.exports = function () {
             }
           }
         },
+        getStyleLoader(),
         {
           test: /\.woff(\?.*)?$/,
           loader: 'url-loader?prefix=fonts/&name=fonts/[name].[ext]&limit=10000&mimetype=application/font-woff'
@@ -63,6 +86,11 @@ module.exports = function () {
         hash: true,
         filename: 'index.html',
         inject: 'body'
+      }),
+      new webpack.ProvidePlugin({
+        jQuery: 'jquery',
+        $: 'jquery',
+        jquery: 'jquery'
       })
     ]
   };

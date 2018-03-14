@@ -1,6 +1,7 @@
 import React from 'react';
 import * as ReactDOM from 'react-dom';
-import MovieService from './services/movie.service';
+import {BrowserRouter as Router} from 'react-router-dom'
+import RootContainer from './container/root-container';
 
 class AppBootstrapper {
   run() {
@@ -17,15 +18,12 @@ class AppBootstrapper {
     const store = this.store;
     
     ReactDOM.render(
-      <div>
-        Hello world
-      </div>,
+      <Router>
+        <RootContainer />
+      </Router>,
       document.getElementById('root')
     );
   }
 }
 
-const shouldRunBootstrapped = location.pathname === '/' && location.hash.length === 0;
-if (shouldRunBootstrapped) {
-  new AppBootstrapper().run();
-}
+new AppBootstrapper().run();
