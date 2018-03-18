@@ -5,20 +5,36 @@ import Movie from '../components/movie';
 import Movies from '../components/movies';
 import PopularSeries from '../components/popular-series';
 import Upcoming from '../components/upcoming';
-import {Switch, Route, Link, NavLink} from 'react-router-dom';
+import {Switch, Route, Link} from 'react-router-dom';
+import MovieService from  '../services/movie.service';
 
 class RootContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      genres: [],
+      topRateMovies: []
+    };
+    this.movieService = new MovieService();
+  }
+  
+  componentDidMount() {
+    this.movieService.getGenres().then((genres) => {
+      this.setState({genres: genres});
+    });
+    this.movieService.getTopRatedMovies().then((topRateMovies) => {
+      this.setState({topRateMovies: topRateMovies});
+    });
+    
   }
   
   render() {
-    const genres = [
-      {id: 1, name:'Action'}, {id: 2, name: 'Adventure'}, {id: 3, name: 'Animation'}, {id: 4, name: 'Comedy'},
-      {id: 5, name: 'Crime'}, {id: 6, name: 'Documentary'}, {id: 7, name:'Drama'}, {id: 8, name: 'Family'}, {id: 9, name: 'Fantasy'}, {id: 10, name: 'History'},
-      {id: 11, name: 'Horror'}, {id: 12, name: 'Music'}, {id: 13, name: 'Mystery'}, {id: 14, name: 'Romance'}, {id: 15, name: 'War'}
-    ];
-    
+    // const genres = [
+    //   {id: 1, name:'Action'}, {id: 2, name: 'Adventure'}, {id: 3, name: 'Animation'}, {id: 4, name: 'Comedy'},
+    //   {id: 5, name: 'Crime'}, {id: 6, name: 'Documentary'}, {id: 7, name:'Drama'}, {id: 8, name: 'Family'}, {id: 9, name: 'Fantasy'}, {id: 10, name: 'History'},
+    //   {id: 11, name: 'Horror'}, {id: 12, name: 'Music'}, {id: 13, name: 'Mystery'}, {id: 14, name: 'Romance'}, {id: 15, name: 'War'}
+    // ];
+    var {genres, topRateMovies} = this.state;
     return (
       <div>
         <nav className="navbar navbar-expand-md fixed-top navbar-light bg-light">
@@ -56,7 +72,7 @@ class RootContainer extends Component {
   
             <div className="col-sm-12 col-md-9 col-lg-10">
               <Switch>
-                <Route exact path='/' render={(routeParams) => <Movies topRatedList={[]} popularList={[]} /> }/>
+                <Route exact path='/' render={(routeParams) => <Movies topRatedList={topRateMovies} popularList={[]} /> }/>
                 <Route path='/upcoming' component={Upcoming} />
                 <Route path='/popular-series' component={PopularSeries}/>
                 <Route path='/genres/:id/:name' render={(routeParams) => <Movies topRatedList={[]} popularList={[]} /> } />

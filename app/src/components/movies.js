@@ -16,7 +16,7 @@ class Movies extends Component {
           <form>
             <div className="form-group">
               <div className="input-group">
-                <input type="text" className="form-control" placeholder="Search for movies"></input>
+                <input type="text" className="form-control" placeholder="Search for movies" />
                 <span className="input-group-btn">
                   <button className="btn btn-primary">Go!</button>
                 </span>
@@ -30,7 +30,7 @@ class Movies extends Component {
         <div className="row is-flex">
           {
             topRatedList.map((item, index) => <div className="col-sm-6 col-md-4 col-lg-3">
-              <MovieCard movie={item} key={index}/>
+              <MovieCard movie={item} key={item.id}/>
             </div>)
           }
         </div>

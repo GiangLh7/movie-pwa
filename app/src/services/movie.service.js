@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 export default class MovieService {
   
@@ -26,48 +26,74 @@ export default class MovieService {
   getInTheaters() {
     // /discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22
       const searchOption = {
-        api_key: this.apiKey,
-        'primary_release_date.gte': '',
-        'primary_release_date.lt': '',
-        sort_by: 'popularity.desc'
+        params: {
+          api_key: this.apiKey,
+          'primary_release_date.gte': '',
+          'primary_release_date.lt': '',
+          sort_by: 'popularity.desc'
+        }
       };
       return axios.get(`${this.baseUri}/discover/movie`, searchOption);
   }
   
   getTopRatedMovies() {
     const searchOption = {
-      api_key: this.apiKey
+      params: {
+        api_key: this.apiKey
+      }
     };
-    return axios.get(`${this.baseUri}/movie/top_rated`, searchOption);
+    return axios.get(`${this.baseUri}/movie/top_rated`, searchOption).then((response) => {
+      return new Promise((resolve, reject) => {
+        if (response.status !== 200 || !response.data) {
+          return reject();
+        }
+        resolve(response.data.results);
+      })
+    });
   }
   
   searchMovies(searchStr) {
     const searchOption = {
-      api_key: this.apiKey,
-      sort_by: 'popularity.desc',
-      query: searchStr
+      params: {
+        api_key: this.apiKey,
+        sort_by: 'popularity.desc',
+        query: searchStr
+      }
     };
     return axios.get(`${this.baseUri}/search/movie`, searchOption);
   }
   
   getMovie(id) {
     const searchOption = {
-      api_key: this.apiKey
+      params: {
+        api_key: this.apiKey
+      }
     };
     return axios.get(`${this.baseUri}/movie/${id}`, searchOption);
   }
   
   getGenres() {
     const searchOption = {
-      api_key: this.apiKey,
-      language: 'en-US'
+      params: {
+        api_key: this.apiKey,
+        language: 'en-US'
+      }
     };
-    return axios.get(`${this.baseUri}/genre/movie/list`, searchOption);
+    return axios.get(`${this.baseUri}/genre/movie/list`, searchOption).then((response) => {
+      return new Promise((resolve, reject) => {
+        if (response.status !== 200 || !response.data) {
+          return reject();
+        }
+        resolve(response.data.genres);
+      });
+    });
   }
   
   getMoviesByGenre(id) {
     const searchOption = {
-      api_key: this.apiKey
+      params: {
+        api_key: this.apiKey
+      }
     };
     return axios.get(`${this.baseUri}/genre/${id}/movies`, searchOption);
   }
@@ -81,21 +107,28 @@ export default class MovieService {
   
   getMovieVideos(id) {
     const searchOption = {
-      api_key: this.apiKey
+      params: {
+        api_key: this.apiKey
+      }
+      
     };
     return axios.get(`${this.baseUri}/movie/${id}/videos`, searchOption);
   }
   
   getSimilarMovies(id) {
     const searchOption = {
-      api_key: this.apiKey
+      params: {
+        api_key: this.apiKey
+      }
     };
     return axios.get(`${this.baseUri}/movie/${id}/similar`, searchOption);
   }
   
   getMovieCredits(id) {
     const searchOption = {
-      api_key: this.apiKey
+      params: {
+        api_key: this.apiKey
+      }
     };
     return axios.get(`${this.baseUri}/movie/${id}/credits`, searchOption);
   }

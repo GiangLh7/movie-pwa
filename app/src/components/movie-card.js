@@ -9,11 +9,11 @@ class MovieCard extends Component {
   
   render() {
     const { movie } = this.props;
-    return(
-      <div className="thumnail">
-        <img src={movie.poster_path ? `https://image.tmdb.org/t/p/w300/${movie.poster_path}` : 'assets/img/abstract-image.jpg'} />
-        <div className="caption">
-          <h4 className="text-ellipsis">
+    return (
+      <div className="card h-100">
+        <img className="card-img" src={movie.poster_path ? `https://image.tmdb.org/t/p/w300/${movie.poster_path}` : 'assets/img/abstract-image.jpg'} />
+        <div className="card-body">
+          <h4 className="card-title text-ellipsis">
             <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
           </h4>
           <p><strong>Release Date: </strong>{movie.release_date}</p>
@@ -32,9 +32,4 @@ class MovieCard extends Component {
     );
   }
 }
-
-MovieCard.prototype = {
-  movie: PropTypes.object.isRequired
-}
-
 export default MovieCard;
