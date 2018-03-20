@@ -29,8 +29,8 @@ class Movies extends Component {
         <h3 className="orange-text">Top Rated Movies</h3>
         <div className="row is-flex">
           {
-            topRatedList.map((item, index) => <div className="col-sm-6 col-md-4 col-lg-3">
-              <MovieCard movie={item} key={item.id}/>
+            topRatedList.map((item, index) => <div className="col-sm-6 col-md-4 col-lg-3" key={index}>
+              <MovieCard movie={item} />
             </div>)
           }
         </div>
@@ -39,8 +39,8 @@ class Movies extends Component {
         <h3 className="orange-text">Popular Movies</h3>
         <div className="row is-flex">
           {
-            popularList.map((item, index) => <div className="col-sm-6 col-md-4 col-lg-3">
-              <MovieCard movie={item} key={index}/>
+            popularList.map((item, index) => <div className="col-sm-6 col-md-4 col-lg-3" key={index}>
+              <MovieCard movie={item} />
             </div>)
           }
         </div>

@@ -69,7 +69,14 @@ export default class MovieService {
         api_key: this.apiKey
       }
     };
-    return axios.get(`${this.baseUri}/movie/${id}`, searchOption);
+    return axios.get(`${this.baseUri}/movie/${id}`, searchOption).then((response) => {
+      return new Promise((resolve, reject) => {
+        if (response.status !== 200 || !response.data) {
+          return reject();
+        }
+        resolve(response.data);
+      });
+    });
   }
   
   getGenres() {
@@ -130,6 +137,13 @@ export default class MovieService {
         api_key: this.apiKey
       }
     };
-    return axios.get(`${this.baseUri}/movie/${id}/credits`, searchOption);
+    return axios.get(`${this.baseUri}/movie/${id}/credits`, searchOption).then((response) => {
+      return new Promise((resolve, reject) => {
+        if (response.status !== 200 && !response.data) {
+          return reject();
+        }
+        resolve(response.data);
+      })
+    });
   }
 }
