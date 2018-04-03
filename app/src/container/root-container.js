@@ -19,11 +19,12 @@ class RootContainer extends Component {
   }
   
   componentDidMount() {
+    var self = this;
     this.movieService.getGenres().then((genres) => {
-      this.setState({genres: genres});
+      self.setState({genres: genres});
     });
     this.movieService.getTopRatedMovies().then((topRateMovies) => {
-      this.setState({topRateMovies: topRateMovies});
+      self.setState({topRateMovies: topRateMovies});
     });
     
   }

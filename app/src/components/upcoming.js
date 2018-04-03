@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PostBoard from '../components/posts/postboard';
 
 class Upcoming extends Component {
   constructor(props) {
@@ -7,8 +8,8 @@ class Upcoming extends Component {
   
   render() {
     return (
-      <div>
-        Upcoming movies
+      <div className="">
+        <PostBoard />
       </div>
     );
   }

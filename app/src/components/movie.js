@@ -14,7 +14,7 @@ class Movie extends Component {
   }
   
   componentDidMount() {
-    var id = this.props.match.params.id;
+    const id = this.props.match.params.id;
     if (id) {
       this.movieService.getMovie(id).then((movie) => {
         this.setState({movie: movie});
@@ -33,7 +33,7 @@ class Movie extends Component {
     return (
       <div className="row">
         <div className="col-md-4">
-          <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} className="thumbnail" alt=""/>
+          <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} className="img-thumbnail" alt=""/>
           {
             movie.homepage ? <p>
               <a href={movie.homepage} className="btn btn-info btn-block" target="_blank">Visit Movies Website</a>

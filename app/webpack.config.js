@@ -32,7 +32,7 @@ module.exports = function () {
     },
     output: {
       filename: '[name].js',
-      path: path.resolve(__dirname, '../public'),
+      path: path.resolve(__dirname, '../server/public'),
       publicPath: '/'
     },
     resolve: {
@@ -49,7 +49,8 @@ module.exports = function () {
               presets: ['env', 'flow', 'react'],
               plugins: [
                 'transform-decorators-legacy',
-                'transform-class-properties'
+                'transform-class-properties',
+                'transform-object-rest-spread'
               ]
             }
           }

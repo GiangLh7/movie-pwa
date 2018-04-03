@@ -1,0 +1,22 @@
+{
+  "hapi": {
+    "conf": {
+      "port": 3000,
+      "debug": {
+        "request": [
+          "error",
+          "uncaught"
+        ]
+      }
+    }
+  },
+
+  "API_PATH": "",
+
+  "googleMapAPIKey": "AIzaSyANKPGJ4MMIyXwcc1AdGSmQuJOuQwUPpRE",
+
+  "NODE_ENV": "development",
+
+  "appConfig": {
+  }
+}
